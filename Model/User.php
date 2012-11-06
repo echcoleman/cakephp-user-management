@@ -140,7 +140,7 @@ class User extends UserManagementAppModel {
  * @return array Bind node array
  */
 	public function bindNode($user) {
-		return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+		return array('model' => 'Group', 'foreign_key' => $user['UserManagement.User']['group_id']);
 	}
 	
 /**

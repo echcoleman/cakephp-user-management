@@ -36,6 +36,10 @@ class PermissionsController extends UserManagementAppController {
 		// hardcoded permissions
 		// @todo: make customizable and move to the database
 		
+		// allow admins to do everything
+		$group->id = 1;
+		$this->Acl->allow($group, 'controllers');
+		
 		$this->Session->setFlash(__('Permissions successfully setup'));
 		$this->redirect(array('controller' => 'groups', 'action' => 'index'));
 	}
