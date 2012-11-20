@@ -33,6 +33,14 @@ class GroupsController extends UserManagementAppController {
 	}
 
 /**
+ * admin_add method (uses admin_edit method)
+ * @return void
+ */
+	public function admin_add() {
+		$this->setAction('admin_edit');
+	}
+
+/**
  * admin_add/edit method
  *
  * @param string $id
