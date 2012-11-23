@@ -18,48 +18,25 @@ class UserAuthHelper extends AppHelper {
 	 * @access public
 	 * @return boolean
 	 */
-	public function isLogged() {
-		return ($this->getUserId() !== null);
+	public function loggedIn() {
+		return $this->user() != array();
 	}
 
-	/**
-	 * Used to get user from session
-	 *
-	 * @access public
-	 * @return array
-	 */
-	public function getUser() {
-		return $this->Session->read('UserAuth');
+/**
+ * Get the current user or user value by passed key
+ * 
+ * @param string $key field to retrieve.  Leave null to get entire User record
+ * @return mixed User record. or null if no user is logged in.
+ */
+	public static function user($key = null) {
+		if ($key == 'group') {
+			$key = 'Group.key';
+		}
+		
+		$user = CakeSession::read(AuthComponent::$sessionKey);
+		if ($key === null) {
+			return $user;
+		}
+		return Hash::get($user, $key);
 	}
-
-	/**
-	 * Used to get user id from session
-	 *
-	 * @access public
-	 * @return integer
-	 */
-	public function getUserId() {
-		return $this->Session->read('UserAuth.User.id');
-	}
-
-	/**
-	 * Used to get group id from session
-	 *
-	 * @access public
-	 * @return integer
-	 */
-	public function getGroupId() {
-		return $this->Session->read('UserAuth.User.user_group_id');
-	}
-
-	/**
-	 * Used to get group name from session
-	 *
-	 * @access public
-	 * @return string
-	 */
-	public function getGroupName() {
-		return $this->Session->read('UserAuth.UserGroup.alias_name');
-	}
-
 }
