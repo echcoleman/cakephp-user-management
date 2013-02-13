@@ -58,7 +58,7 @@ class GroupsController extends UserManagementAppController {
 				$this->Session->setFlash(__('The group has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The group could not be saved. Please, try again.'), null, null, 'error');
 			}
 		}
 		if ($id && empty($this->data)) {
@@ -84,7 +84,7 @@ class GroupsController extends UserManagementAppController {
 			$this->Session->setFlash(__('Group deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Group was not deleted'));
+		$this->Session->setFlash(__('Group was not deleted'), null, null, 'error');
 		$this->redirect(array('action' => 'index'));
 	}
 }

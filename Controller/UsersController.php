@@ -41,7 +41,7 @@ class UsersController extends UserManagementAppController {
 					$this->Session->setFlash('Your account is not active. Please confirm your account via email or contact our administrators.');
 				}
 				else {
-					$this->Session->setFlash('Your username or password was incorrect. Please try again.');
+					$this->Session->setFlash('Your username or password was incorrect. Please try again.', null, null, 'error');
 				}
 			}
 		}
@@ -78,19 +78,19 @@ class UsersController extends UserManagementAppController {
 				if (!empty($user)) {
 					if ($user['User']['active'] == 1) {
 						if ($this->User->sendForgottenPassword($user)) {
-							$this->Session->setFlash(__('Please check your mail to reset your password'));
+							$this->Session->setFlash(__('Please check your mail to reset your password'), null, null, 'error');
 							unset($this->request->data['User']);
 						}
 						else {
-							$this->Session->setFlash(__('Unable process your request. Please try again.'));
+							$this->Session->setFlash(__('Unable process your request. Please try again.'), null, null, 'error');
 						}
 					}
 					else {
-						$this->Session->setFlash('Your account is not active. Please confirm your account via email or contact our administrators.');
+						$this->Session->setFlash('Your account is not active. Please confirm your account via email or contact our administrators.', null, null, 'error');
 					}
 				}
 				else {
-					$this->Session->setFlash(__('Unable to find user with submitted username or email address. Please try again.'));
+					$this->Session->setFlash(__('Unable to find user with submitted username or email address. Please try again.'), null, null, 'error');
 				}
 			}
 		}
@@ -114,12 +114,12 @@ class UsersController extends UserManagementAppController {
 					$this->Session->setFlash(__('Your password has been updated and emailed to you'));
 				}
 				else {
-					$this->Session->setFlash(__('Unable to update your password. Please try again.'));
+					$this->Session->setFlash(__('Unable to update your password. Please try again.'), null, null, 'error');
 				}
 			}
 		}
 		if ($invalidConfirm) {
-			$this->Session->setFlash(__('Invalid forgotten password confrimation received. Please try again.'));
+			$this->Session->setFlash(__('Invalid forgotten password confrimation received. Please try again.'), null, null, 'error');
 		}
 		$this->redirect(array('action' => 'login'));
 	}
@@ -162,7 +162,7 @@ class UsersController extends UserManagementAppController {
 				$this->Session->setFlash(__('Your profile has been updated'));
 				$this->redirect(array('action' => 'view_profile'));
 			} else {
-				$this->Session->setFlash(__('Unable to update your profile. Please, try again.'));
+				$this->Session->setFlash(__('Unable to update your profile. Please, try again.'), null, null, 'error');
 			}
 		}
 		if (empty($this->data)) {
@@ -220,7 +220,7 @@ class UsersController extends UserManagementAppController {
 				$this->Session->setFlash(__('The user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'), null, null, 'error');
 			}
 		}
 		if ($id && empty($this->data)) {
@@ -248,7 +248,7 @@ class UsersController extends UserManagementAppController {
 			$this->Session->setFlash(__('User deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('User was not deleted'));
+		$this->Session->setFlash(__('User was not deleted'), null, null, 'error');
 		$this->redirect(array('action' => 'index'));
 	}
 }
