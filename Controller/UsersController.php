@@ -38,7 +38,7 @@ class UsersController extends UserManagementAppController {
 				// check if user could not login because they aren't active
 				$this->Auth->authenticate['UserForm']['scope'] = false;
 				if ($this->Auth->identify($this->request, $this->response)) {
-					$this->Session->setFlash('Your account is not active. Please confirm your account via email or contact our administrators.');
+					$this->Session->setFlash('Your account is not active. Please confirm your account via email or contact our administrators.', null, null, 'error');
 				}
 				else {
 					$this->Session->setFlash('Your username or password was incorrect. Please try again.', null, null, 'error');
